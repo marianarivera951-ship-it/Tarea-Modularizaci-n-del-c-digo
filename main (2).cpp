@@ -10,24 +10,37 @@ struct Producto {
     int cantidad;
 };
 
+// Función específica para mostrar menú
+void mostrarMenu() {
+    cout << "\n1. Agregar Producto\n2. Listar Todo\n3. Salir\nSeleccione: ";
+}
+
+// Función específica para agregar
+void agregarProducto(vector<Producto>& inventario) {
+    Producto p;
+    cout << "Codigo: "; cin >> p.codigo;
+    cout << "Nombre: "; cin >> p.nombre;
+    cout << "Cantidad: "; cin >> p.cantidad;
+    inventario.push_back(p);
+}
+
+// Función específica para listar
+void listarProductos(const vector<Producto>& inventario) {
+    for (const auto& p : inventario) {
+        cout << "Cod: " << p.codigo << " | " << p.nombre << " | Cant: " << p.cantidad << endl;
+    }
+}
+
 int main() {
     vector<Producto> inventario;
     int opcion;
 
     do {
-        cout << "\n1. Agregar\n2. Listar\n3. Salir\nOpcion: ";
+        mostrarMenu();
         cin >> opcion;
-
-        if (opcion == 1) {
-            Producto p;
-            cout << "Codigo: "; cin >> p.codigo;
-            cout << "Nombre: "; cin >> p.nombre;
-            cout << "Cantidad: "; cin >> p.cantidad;
-            inventario.push_back(p);
-        } else if (opcion == 2) {
-            for (int i = 0; i < inventario.size(); i++) {
-                cout << inventario[i].nombre << " - " << inventario[i].cantidad << endl;
-            }
+        switch(opcion) {
+            case 1: agregarProducto(inventario); break;
+            case 2: listarProductos(inventario); break;
         }
     } while (opcion != 3);
     return 0;
